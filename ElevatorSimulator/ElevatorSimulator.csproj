@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="DistributionEngine.cs" />
+    <Compile Include="Elevator.cs" />
+    <Compile Include="ElevatorDispatcher.cs" />
+    <Compile Include="InputAnalyser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
