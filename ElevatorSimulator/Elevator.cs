@@ -16,7 +16,6 @@ namespace ElevatorSimulator
         public int direction { get; set; } = 0; // 1 = Up, 0 = Stationary, -1 = Down.
         public bool doorsOpen { get; set; } = false;
         public List<int> stopQueue { get; set; } = new List<int>(); // List containing each floor number the elevator is scheduled to stop at.
-        public int distanceToFloor = 0; // Calculation variable holding distance between this elevator and requested floor. - I dont think this should be here as simultaneous calculations would result invalid.
         static int weightLimit = 900; //KiloGrams (theoretical).
         static Random curWeight = new Random();
         public int ElevatorWeight { get; set; } = curWeight.Next(1, 1000); // 10% chance elevator will be over weight limit.

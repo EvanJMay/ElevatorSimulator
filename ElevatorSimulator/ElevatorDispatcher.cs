@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoreLinq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ElevatorSimulator
     {
         // The elevator dispatcher is responsible for deciding which elevator is best suitable to handle the request.
         public List<Elevator> Elevators { get; set; }
+        public static Dictionary<Elevator, int> ElevatorDistancesDict = new Dictionary<Elevator, int>();
 
         public static Elevator Start(List<Elevator> elevatorList, int floor, int requestDirection)
         {
@@ -51,24 +53,21 @@ namespace ElevatorSimulator
             }
 
             // Gets the closest elevator, and returns that elevator as a result.
-            int closestDistance = ClosestDistance(availableElevators);
-            Elevator elevToSend = (from elev in availableElevators where elev.distanceToFloor == closestDistance select elev).First();
+            Elevator elevToSend = ClosestDistance();
             return elevToSend;
 
-
+            // Get the distance between each elevator and the requested floor.
             void ElevatorDistances(Elevator elevator, int f)
             {
-                elevator.distanceToFloor = Math.Abs(elevator.Floor - f);
+                ElevatorDistancesDict.Add(elevator, Math.Abs(elevator.Floor - f));
             }
 
-            int ClosestDistance(List<Elevator> elevators)
+            // Select the closest elevator.
+            Elevator ClosestDistance()
             {
-                List<int> distances = new List<int>();
-                foreach (Elevator elev in elevators)
-                {
-                    distances.Add(elev.distanceToFloor);
-                }
-                return distances.Min();
+                Elevator closestElev = ElevatorDistancesDict.Where(e => e.Value == ElevatorDistancesDict.Min(e2 => e2.Value)).First().Key;
+                ElevatorDistancesDict.Clear();
+                return closestElev;
             }
         }
     }
