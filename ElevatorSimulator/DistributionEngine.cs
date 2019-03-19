@@ -59,7 +59,7 @@ namespace ElevatorSimulator
                         Task.Delay(5000);
                         elevator.CloseDoors();
                     }
-                    // Are there any outstanding stops left in the queue, if so anounce journey end, set elevator direction to stationary and exit the loop.
+                    // Are there any outstanding stops left in the queue, if not anounce journey end, set elevator direction to stationary and exit the loop.
                     if (elevator.stopQueue.Count == 0)
                     {
                         elevator.direction = 0;
